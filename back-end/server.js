@@ -1,0 +1,13 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require("./db/mongoose");
+const app = express();
+const port = process.env.PORT || 3001;
+app.use (cors());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use("/users", require("./routes/users"));
+app.use("/news", require("./routes/news"));
+app.use("/saved", require("./routes/saved"));
+app.listen(port, () => console.log(`Сервер запущен на порте ${port}`));
